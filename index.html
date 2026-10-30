@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#171c1d" />
+<meta name="description" content="2012 款丰田 RAV4 2.4L 自动四驱豪华炫装版 3D 模型与拆解可视化" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23171c1d'/%3E%3Cpath d='M13 42V24h11c8 0 12 3 12 9 0 4-2 7-6 8l8 10h-8l-6-9v9h-6V29h9c3 0 5 1 5 4s-2 4-5 4h-4' fill='none' stroke='%23ff7043' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E" />
+<title>RAV4 XA30 · 2012 2.4L 四驱 3D 拆解</title>
+<link rel="stylesheet" href="./assets/css/style.css" />
+</head>
+<body>
+<div id="app">
+  <div id="stage" aria-label="2012 款丰田 RAV4 2.4L 四驱三维模型"></div>
+  <div class="scene-atmosphere" aria-hidden="true"></div>
+  <div class="scene-grain" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand-block">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48"><path d="M9 33V15h8.3c7.2 0 11 3 11 8.3 0 3.7-1.9 6.2-5.4 7.4L30 38h-6.7l-5.8-6.6V38H9Zm7.3-6.1h2.4c3.4 0 5.2-1.2 5.2-3.9 0-2.5-1.7-3.7-5-3.7h-2.6v7.6Z" fill="currentColor"/><path d="M34 12v24" stroke="currentColor" stroke-width="1"/><path d="M35.5 12h5.5M35.5 36h5.5M35.5 24h8" stroke="currentColor" stroke-width="1"/></svg>
+      </div>
+      <div class="brand-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span> TOYOTA · XA30 FACELIFT <span class="edition">CN 2012</span></div>
+        <h1><span>RAV4</span><em>2012</em></h1>
+        <p class="model-line">2.4L 自动四驱豪华炫装版 <i>·</i> 第三代 XA30 改款</p>
+      </div>
+    </div>
+
+    <div class="top-actions" role="toolbar" aria-label="显示工具">
+      <button class="tool-btn" data-action="xray" aria-pressed="false" title="X-RAY 透视">
+        <svg viewBox="0 0 24 24"><path d="M12 3 3 7.5v9L12 21l9-4.5v-9L12 3Z"/><path d="m3 7.5 9 4.5 9-4.5M12 12v9"/><circle cx="12" cy="12" r="3"/></svg><span>X-RAY</span>
+      </button>
+      <button class="tool-btn is-on" data-action="labels" aria-pressed="true" title="显示/隐藏部件标签">
+        <svg viewBox="0 0 24 24"><path d="M4 5h9l7 7-7 7H4V5Z"/><circle cx="8.2" cy="12" r="1.2"/><path d="M12 12h4"/></svg><span>标签</span>
+      </button>
+      <button class="tool-btn" data-action="autorotate" aria-pressed="false" title="自动旋转">
+        <svg viewBox="0 0 24 24"><path d="M20 7v5h-5"/><path d="M18.5 16A8 8 0 1 1 20 12"/><circle cx="12" cy="12" r="1"/></svg><span>自动</span>
+      </button>
+      <button class="tool-btn is-on" data-action="ground" aria-pressed="true" title="显示/隐藏地面辅助">
+        <svg viewBox="0 0 24 24"><path d="M3 17h18M5 13h14M7.5 9h9"/><path d="M12 3v3" opacity=".55"/></svg><span>地面</span>
+      </button>
+      <button class="tool-btn" data-action="screenshot" title="导出当前画面">
+        <svg viewBox="0 0 24 24"><path d="M4 7h4l1.5-2h5L16 7h4v12H4V7Z"/><circle cx="12" cy="13" r="4"/></svg><span>截图</span>
+      </button>
+      <button class="tool-btn" data-action="fullscreen" title="全屏">
+        <svg viewBox="0 0 24 24"><path d="M8 4H4v4M16 4h4v4M8 20H4v-4M16 20h4v-4"/></svg><span>全屏</span>
+      </button>
+      <button class="tool-btn mobile-parts-btn" data-action="parts" title="打开部件清单">
+        <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>部件</span>
+      </button>
+    </div>
+  </header>
+
+  <aside class="parts-panel panel" id="partsPanel" aria-label="可拆解部件列表">
+    <div class="panel-topline"></div>
+    <div class="panel-heading">
+      <div><span class="kicker">COMPONENT INDEX</span><h2>结构模块</h2></div>
+      <span class="count-badge">5</span>
+    </div>
+    <p class="panel-intro">选择模块以定位并查看结构说明</p>
+    <div class="part-list" id="partList" role="list"></div>
+    <div class="panel-foot">
+      <span class="pulse-dot"></span>
+      <span>ASSEMBLY MAP / 实车布局</span>
+      <button class="panel-close" data-action="parts-close" aria-label="关闭部件面板">×</button>
+    </div>
+  </aside>
+
+  <aside class="spec-panel panel" aria-label="车型数据与视角">
+    <div class="panel-topline"></div>
+    <div class="spec-heading">
+      <div><span class="kicker">MODEL DATA</span><h2>XA30 / 2012</h2></div>
+      <span class="country-tag">一汽丰田</span>
+    </div>
+    <div class="spec-lead">
+      <div><span>ENGINE</span><strong>2AZ-FE</strong></div>
+      <div><span>DRIVE</span><strong>4WD</strong></div>
+      <div><span>GEARBOX</span><strong>4-SPEED AT</strong></div>
+    </div>
+    <dl class="dim-grid">
+      <div><dt>车长</dt><dd>4630 <small>mm</small></dd></div>
+      <div><dt>车宽</dt><dd>1855 <small>mm</small></dd></div>
+      <div><dt>车高</dt><dd>1720 <small>mm</small></dd></div>
+      <div><dt>轴距</dt><dd>2660 <small>mm</small></dd></div>
+    </dl>
+    <div class="spec-chips">
+      <span>125 kW</span><span>224 N·m</span><span>1620 kg</span><span>225/65 R17</span>
+    </div>
+    <div class="view-heading"><span>OBSERVE</span><b>观察视角</b></div>
+    <div class="view-grid" aria-label="观察视角">
+      <button data-view="hero" class="is-active"><i>01</i>左前 45°</button>
+      <button data-view="front"><i>02</i>正视</button>
+      <button data-view="side"><i>03</i>侧面</button>
+      <button data-view="rear"><i>04</i>车尾</button>
+      <button data-view="under"><i>05</i>车底</button>
+      <button data-view="top"><i>06</i>俯视</button>
+    </div>
+    <div class="spec-foot"><span>XA30 FACELIFT</span><span>REF. 2012 CN</span></div>
+  </aside>
+
+  <div class="mobile-view-strip" aria-label="观察视角">
+    <button data-view="hero">前 45°</button><button data-view="front">正视</button><button data-view="side">侧面</button><button data-view="rear">车尾</button><button data-view="under">车底</button>
+  </div>
+
+  <div class="label-layer" id="labelLayer" aria-live="off"></div>
+  <svg class="leader-layer" id="leaderLayer" aria-hidden="true"></svg>
+
+  <section class="inspector panel" id="inspector" aria-live="polite">
+    <button class="inspector-close" data-action="deselect" aria-label="关闭部件说明">×</button>
+    <div class="kicker"><span id="selIndex">MODULE 01</span> / SELECTED</div>
+    <div class="selected-ribbon"></div>
+    <h3 id="selName">车身外壳</h3>
+    <p id="selDesc">承载式车身外覆件，采用高刚性钢板与白色珠光漆面。</p>
+    <div class="sel-meta" id="selMeta"><span>位置：外围</span><span>拆解：向上</span></div>
+    <button class="focus-btn" data-action="focus-selected">聚焦此模块 <span>↗</span></button>
+  </section>
+
+  <div class="bottom-dock panel" aria-label="拆解控制">
+    <div class="dock-head">
+      <div class="dock-title"><span>DISASSEMBLY</span><b>拆解序列</b></div>
+      <div class="preset-group" role="group" aria-label="拆解程度">
+        <button class="preset is-active" data-preset="0">完整车辆</button>
+        <button class="preset" data-preset="0.52">半拆解</button>
+        <button class="preset" data-preset="1">完全拆解</button>
+      </div>
+      <div class="explode-readout"><b id="explodeValue">000</b><span>%</span></div>
+    </div>
+    <div class="slider-line">
+      <button class="reset-btn" data-action="reset" title="复位车辆" aria-label="复位车辆">
+        <svg viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 2.3 7.1M4 4v6h6"/></svg>
+      </button>
+      <div class="range-shell">
+        <input id="explodeRange" type="range" min="0" max="100" value="0" step="1" aria-label="拆解进度" />
+        <div class="range-track"><div class="range-fill" id="rangeFill"></div><div class="range-ticks"><i></i><i></i><i></i><i></i><i></i></div></div>
+      </div>
+      <div class="range-caption"><span>完整</span><span>模块展开</span><span>分解</span></div>
+    </div>
+  </div>
+
+  <div class="interaction-hint">
+    <span class="mouse-icon"><i></i></span>
+    <span>拖拽旋转</span><span class="dot">·</span><span>滚轮缩放</span><span class="dot">·</span><span>右键平移</span>
+  </div>
+
+  <div class="axis-readout" aria-hidden="true">
+    <span>L</span><i></i><b>4630</b><em>mm</em>
+  </div>
+
+  <div class="boot" id="boot">
+    <div class="boot-inner">
+      <div class="boot-mark">R</div>
+      <div class="boot-copy"><span>XA30 / 2012 FACELIFT</span><b>RAV4</b><p>正在载入 2012 款 RAV4 2.4L 四驱</p></div>
+      <div class="boot-bar"><i id="bootBar"></i></div>
+      <span class="boot-num" id="bootNum">00</span>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+</div>
+
+<script type="importmap">
+{"imports":{"three":"./assets/vendor/three/build/three.module.js","three/addons/":"./assets/vendor/three/addons/"}}
+</script>
+<script type="module" src="./assets/js/main.js"></script>
+</body>
+</html>
+
